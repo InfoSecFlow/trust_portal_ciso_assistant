@@ -1,4 +1,4 @@
-import { ADMIN_PASSWORD } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 export function isAdminAuthorized(request: Request): boolean {
 	const authHeader = request.headers.get('authorization');
@@ -10,7 +10,7 @@ export function isAdminAuthorized(request: Request): boolean {
 	try {
 		const decoded = atob(credentials);
 		const [, password] = decoded.split(':', 2);
-		return password === ADMIN_PASSWORD;
+		return password === env.ADMIN_PASSWORD;
 	} catch {
 		return false;
 	}
@@ -18,8 +18,8 @@ export function isAdminAuthorized(request: Request): boolean {
 
 export function isAdminCookieValid(cookies: { get(name: string): string | undefined }): boolean {
 	const token = cookies.get('admin_session');
-	if (!token || !ADMIN_PASSWORD) return false;
-	return token === hashSession(ADMIN_PASSWORD);
+	if (!token || !env.ADMIN_PASSWORD) return false;
+	return token === hashSession(env.ADMIN_PASSWORD);
 }
 
 export function hashSession(password: string): string {
@@ -34,5 +34,5 @@ export function hashSession(password: string): string {
 }
 
 export function getAdminPassword(): string {
-	return ADMIN_PASSWORD || '';
+	return env.ADMIN_PASSWORD || '';
 }

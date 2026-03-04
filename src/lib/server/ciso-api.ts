@@ -1,4 +1,4 @@
-import { CISO_API_URL, CISO_API_TOKEN } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
 const REQUEST_TIMEOUT_MS = 30_000;   // 30 seconds per request
@@ -42,8 +42,8 @@ class CisoApiClient {
 	private token: string;
 
 	constructor() {
-		this.baseUrl = CISO_API_URL.replace(/\/+$/, '');
-		this.token = CISO_API_TOKEN;
+		this.baseUrl = (env.CISO_API_URL || '').replace(/\/+$/, '');
+		this.token = env.CISO_API_TOKEN || '';
 	}
 
 	private get headers(): Record<string, string> {
