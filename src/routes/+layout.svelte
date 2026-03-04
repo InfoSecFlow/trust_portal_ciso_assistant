@@ -29,8 +29,11 @@
 </script>
 
 <svelte:head>
-	<title>{portalName}</title>
-	<meta name="description" content="Security, privacy, and compliance information" />
+	<title>{portalName} — InfoSecFlow</title>
+	<meta name="description" content="Trust portal powered by InfoSecFlow — security, privacy, and compliance transparency for your organization." />
+	<meta property="og:title" content="{portalName} — InfoSecFlow" />
+	<meta property="og:description" content="Security posture, compliance certifications, and data protection practices." />
+	<meta property="og:type" content="website" />
 </svelte:head>
 
 <div
@@ -102,14 +105,14 @@
 		<div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
 			<div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
 				<p class="text-sm text-gray-400">
-					{#if footerText}
-						{footerText}
-					{:else}
-						Powered by
-						<a href="https://github.com/intuitem/ciso-assistant-community" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-gray-700">CISO Assistant</a>
-					{/if}
-				</p>
-				<p class="text-sm text-gray-400">{new Date().getFullYear()} &middot; {portalName}</p>
+				{#if footerText}
+					{footerText}
+				{:else}
+					Powered by
+					<a href="https://infosecflow.com" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-gray-700">InfoSecFlow</a>
+				{/if}
+			</p>
+			<p class="text-sm text-gray-400">&copy; {new Date().getFullYear()} &middot; {portalName} &middot; <a href="https://infosecflow.com" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-gray-700">InfoSecFlow</a></p>
 			</div>
 		</div>
 	</footer>
