@@ -1,36 +1,36 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+node_modules/
 
-# testing
-/coverage
+# SvelteKit
+.svelte-kit/
 
-# next.js
-/.next/
-/out/
+# build output
+build/
+dist/
 
-# production
-/build
-
-# misc
-.DS_Store
+# environment & secrets
+.env
+.env.local
+.env.*.local
 *.pem
 
-# debug
+# data & uploads (user-generated at runtime)
+data/
+static/uploads/
+
+# OS & editor
+.DS_Store
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# debug logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# local env files
-.env*.local
-.env
-
-# vercel
-.vercel
-
-# typescript
+# misc
 *.tsbuildinfo
-next-env.d.ts
+/coverage
