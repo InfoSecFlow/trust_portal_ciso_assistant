@@ -180,7 +180,7 @@ export function groupEntitiesByFolder(
 		.sort((a, b) => a.folderName.localeCompare(b.folderName));
 }
 
-export function buildRequirementTree(nodes: CisoRequirementNode[]): CisoRequirementNode & { children: CisoRequirementNode[] }[] {
+export function buildRequirementTree(nodes: CisoRequirementNode[]): (CisoRequirementNode & { children: CisoRequirementNode[] })[] {
 	const nodeMap = new Map<string | undefined, CisoRequirementNode[]>();
 
 	for (const node of nodes) {
