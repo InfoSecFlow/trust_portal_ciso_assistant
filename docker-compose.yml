@@ -1,0 +1,11 @@
+services:
+  trust-portal:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - CISO_API_URL=${CISO_API_URL}
+      - CISO_API_TOKEN=${CISO_API_TOKEN}
+      - PUBLIC_PORTAL_NAME=${PUBLIC_PORTAL_NAME:-Trust Center}
+      - PUBLIC_PORTAL_DESCRIPTION=${PUBLIC_PORTAL_DESCRIPTION:-Our commitment to security, privacy, and compliance}
+    restart: unless-stopped

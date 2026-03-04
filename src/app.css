@@ -1,0 +1,43 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+@import '@skeletonlabs/skeleton';
+@import '@skeletonlabs/skeleton/optional/presets';
+
+@import '../trust-theme.css';
+@source '../node_modules/@skeletonlabs/skeleton-svelte/dist';
+@source './**/*.{html,js,svelte,ts}';
+
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentcolor);
+	}
+}
+
+@layer utilities {
+	html,
+	body {
+		@apply h-full;
+	}
+}
+
+@utility brand-link {
+	color: var(--brand-primary, #2563eb);
+	&:hover {
+		filter: brightness(0.85);
+	}
+}
+
+@utility brand-bg {
+	background-color: var(--brand-primary, #2563eb);
+}
+
+@utility brand-bg-accent {
+	background-color: var(--brand-accent, #7c3aed);
+}
