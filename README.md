@@ -27,6 +27,14 @@ Open `http://localhost:5173`.
 
 ## Docker
 
+Pre-built images are published to GitHub Container Registry on every push to `main`:
+
+```bash
+docker run -p 3000:3000 --env-file .env ghcr.io/infosecflow/trust_portal_ciso_assistant:main
+```
+
+Or build it yourself:
+
 ```bash
 docker build -t trust-portal .
 docker run -p 3000:3000 --env-file .env trust-portal
