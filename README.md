@@ -58,6 +58,10 @@ Branding (name, description, logo, colors) can also be managed from the `/admin`
 
 SvelteKit · Tailwind CSS · Node adapter
 
+## Demo
+You could see the demo of trust portal on the link:
+https://trust.infosecflow.com/
+
 ## License
 
 [AGPLv3](LICENSE.md)
