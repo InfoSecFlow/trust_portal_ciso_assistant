@@ -4,6 +4,9 @@ A public-facing trust center that pulls live data from your [CISO Assistant](htt
 
 ![Trust Portal view](img/trust_portal_infosecflow.png)
 
+You could see the demo of trust portal on the link:
+https://trust.infosecflow.com/
+
 ## What it does
 
 - **Compliance** — shows your frameworks (ISO 27001, SOC 2, etc.) with real-time assessment progress based on your CISO Assistant Instnace 
@@ -59,10 +62,6 @@ Branding (name, description, logo, colors) can also be managed from the `/admin`
 ## Stack
 
 SvelteKit · Tailwind CSS · Node adapter
-
-## Demo
-You could see the demo of trust portal on the link:
-https://trust.infosecflow.com/
 
 ## License
 
