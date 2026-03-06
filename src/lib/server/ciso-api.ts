@@ -1,11 +1,13 @@
 import { env } from '$env/dynamic/private';
 
-const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
-const REQUEST_TIMEOUT_MS = 30_000;   // 30 seconds per request
+const CACHE_TTL_MS = 5 * 60 * 1000;
+const CACHE_STALE_MS = 10 * 60 * 1000;
+const REQUEST_TIMEOUT_MS = 30_000;
 
 interface CacheEntry<T> {
 	data: T;
-	expiresAt: number;
+	freshUntil: number;
+	staleUntil: number;
 }
 
 interface PaginatedResponse<T> {
@@ -16,19 +18,22 @@ interface PaginatedResponse<T> {
 }
 
 const cache = new Map<string, CacheEntry<unknown>>();
+const refreshing = new Set<string>();
 
-function getCached<T>(key: string): T | null {
+function getCached<T>(key: string): { data: T; fresh: boolean } | null {
 	const entry = cache.get(key);
 	if (!entry) return null;
-	if (Date.now() > entry.expiresAt) {
+	const now = Date.now();
+	if (now > entry.staleUntil) {
 		cache.delete(key);
 		return null;
 	}
-	return entry.data as T;
+	return { data: entry.data as T, fresh: now <= entry.freshUntil };
 }
 
-function setCache<T>(key: string, data: T, ttl = CACHE_TTL_MS): void {
-	cache.set(key, { data, expiresAt: Date.now() + ttl });
+function setCache<T>(key: string, data: T): void {
+	const now = Date.now();
+	cache.set(key, { data, freshUntil: now + CACHE_TTL_MS, staleUntil: now + CACHE_STALE_MS });
 }
 
 function fetchWithTimeout(url: string, init: RequestInit, timeoutMs = REQUEST_TIMEOUT_MS): Promise<Response> {
@@ -86,20 +91,34 @@ class CisoApiClient {
 	}
 
 	private async cachedFetchAll<T>(key: string, endpoint: string, params?: Record<string, string>): Promise<T[]> {
-		const cached = getCached<T[]>(key);
-		if (cached) {
-			console.log(`[cache] HIT  ${key} (${cached.length} items)`);
-			return cached;
+		const hit = getCached<T[]>(key);
+		if (hit) {
+			if (!hit.fresh && !refreshing.has(key)) {
+				refreshing.add(key);
+				this.fetchAll<T>(endpoint, params)
+					.then((data) => setCache(key, data))
+					.catch((err) => console.error(`[cache] background refresh failed for ${key}:`, err))
+					.finally(() => refreshing.delete(key));
+			}
+			return hit.data;
 		}
-		console.log(`[cache] MISS ${key} — fetching from API`);
 		const data = await this.fetchAll<T>(endpoint, params);
 		setCache(key, data);
 		return data;
 	}
 
 	private async cachedRequest<T>(key: string, endpoint: string, params?: Record<string, string>): Promise<T> {
-		const cached = getCached<T>(key);
-		if (cached) return cached;
+		const hit = getCached<T>(key);
+		if (hit) {
+			if (!hit.fresh && !refreshing.has(key)) {
+				refreshing.add(key);
+				this.request<T>(endpoint, params)
+					.then((data) => setCache(key, data))
+					.catch((err) => console.error(`[cache] background refresh failed for ${key}:`, err))
+					.finally(() => refreshing.delete(key));
+			}
+			return hit.data;
+		}
 		const data = await this.request<T>(endpoint, params);
 		setCache(key, data);
 		return data;

@@ -5,6 +5,11 @@
 	let { data } = $props();
 </script>
 
+<svelte:head>
+	<title>Compliance Frameworks — InfoSecFlow Trust Portal</title>
+	<meta name="description" content="Active compliance certifications and assessment progress including ISO 27001, SOC 2, and other security frameworks." />
+</svelte:head>
+
 <div class="space-y-10">
 	<div>
 		<h1 class="text-3xl font-bold text-gray-900">Compliance Frameworks</h1>

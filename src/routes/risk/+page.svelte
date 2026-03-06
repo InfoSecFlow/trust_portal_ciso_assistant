@@ -20,6 +20,11 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Risk Posture — InfoSecFlow Trust Portal</title>
+	<meta name="description" content="High-level overview of our risk management approach, risk level distribution, and treatment strategies." />
+</svelte:head>
+
 <div class="space-y-8">
 	<div>
 		<h1 class="text-3xl font-bold text-gray-900">Risk Posture</h1>

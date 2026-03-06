@@ -10,6 +10,23 @@
 	const portalDescription = $derived(page.data?.portalDescription ?? 'Transparency into our security posture, compliance certifications, and data protection practices.');
 </script>
 
+<svelte:head>
+	<title>{portalName} — InfoSecFlow Trust Portal</title>
+	<meta name="description" content="Security posture overview for {portalName}. Compliance frameworks, security controls, risk management, and vendor transparency powered by InfoSecFlow." />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"name": `${portalName} — InfoSecFlow`,
+		"url": "https://trust.infosecflow.com",
+		"publisher": {
+			"@type": "Organization",
+			"name": "InfoSecFlow",
+			"url": "https://infosecflow.com"
+		},
+		"description": "Security posture, compliance certifications, and data protection practices."
+	})}</script>`}
+</svelte:head>
+
 <div class="space-y-12">
 	<!-- Hero -->
 	<section class="pt-4 text-center">

@@ -7,6 +7,11 @@
 	let activeTab = $state<'controls' | 'policies'>('controls');
 </script>
 
+<svelte:head>
+	<title>Security Controls — InfoSecFlow Trust Portal</title>
+	<meta name="description" content="Implemented security controls and policies protecting our organization. View control categories, implementation status, and active policies." />
+</svelte:head>
+
 <div class="space-y-8">
 	<div>
 		<h1 class="text-3xl font-bold text-gray-900">Security Controls</h1>

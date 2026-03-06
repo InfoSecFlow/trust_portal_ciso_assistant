@@ -20,6 +20,11 @@
 	const filteredTotal = $derived(filteredGroups.reduce((sum, g) => sum + g.entities.length, 0));
 </script>
 
+<svelte:head>
+	<title>Sub-Processors — InfoSecFlow Trust Portal</title>
+	<meta name="description" content="Third-party vendors and service providers we work with, organized by domain. Transparency into our supply chain." />
+</svelte:head>
+
 <div class="space-y-8">
 	<div>
 		<h1 class="text-3xl font-bold text-gray-900">Sub-Processors</h1>

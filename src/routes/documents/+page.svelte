@@ -20,6 +20,11 @@
 	);
 </script>
 
+<svelte:head>
+	<title>Documents & Resources — InfoSecFlow Trust Portal</title>
+	<meta name="description" content="Security policies, certifications, evidence, and compliance documentation available for review." />
+</svelte:head>
+
 <div class="space-y-8">
 	<div>
 		<h1 class="text-3xl font-bold text-gray-900">Documents & Resources</h1>

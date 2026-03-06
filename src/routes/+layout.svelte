@@ -31,9 +31,16 @@
 <svelte:head>
 	<title>{portalName} — InfoSecFlow</title>
 	<meta name="description" content="Trust portal powered by InfoSecFlow — security, privacy, and compliance transparency for your organization." />
+	<link rel="canonical" href={page.url?.href ?? ''} />
 	<meta property="og:title" content="{portalName} — InfoSecFlow" />
 	<meta property="og:description" content="Security posture, compliance certifications, and data protection practices." />
 	<meta property="og:type" content="website" />
+	<meta property="og:url" content={page.url?.href ?? ''} />
+	<meta property="og:site_name" content="{portalName} — InfoSecFlow" />
+	<meta property="og:image" content="{page.url?.origin ?? ''}/favicon.svg" />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:title" content="{portalName} — InfoSecFlow" />
+	<meta name="twitter:description" content="Security posture, compliance certifications, and data protection practices." />
 </svelte:head>
 
 <div
