@@ -2,6 +2,8 @@
 
 A public-facing trust center that pulls live data from your [CISO Assistant](https://github.com/intuitem/ciso-assistant-community) instance. Give your customers a clear view of your security posture without sharing spreadsheets or PDFs back and forth.
 
+![Trust Portal view](img/trust_portal_infosecflow.png)
+
 ## What it does
 
 - **Compliance** — shows your frameworks (ISO 27001, SOC 2, etc.) with real-time assessment progress based on your CISO Assistant Instnace 
